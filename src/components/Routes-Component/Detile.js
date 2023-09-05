@@ -75,15 +75,17 @@ const Container = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 80%;
+  max-width: 70%;
   height : auto;
   text-align: center;
   align-items:center;
   justify-content :center;
   padding-left : 100px;
   margin-left : 20px;
+  margin-top : 25px;
   img{
-    
+    width : 500px;
+    height: 500px;
   }
  
 `;
