@@ -1,0 +1,31 @@
+/* Define a keyframes animation named 'fade-in' */
+@keyframes fade-in {
+  0% {
+    opacity: 0; /* Start with opacity 0 (completely transparent) */
+  }
+  100% {
+    opacity: 1; /* End with opacity 1 (fully visible) */
+  }
+}
+
+/* Apply the animation to an element with the class 'fade-in' */
+.fade-in{
+  animation: fade-in 0.9s ease-in; /* Use a 1-second duration with ease-in timing function */
+}
+
+
+  .fade-left {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards; /* Faster animation */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20%); /* Move left by 100% of the element's width */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
