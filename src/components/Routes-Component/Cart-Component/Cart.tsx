@@ -4,20 +4,20 @@ import { addItem , removeItem } from '../../../feature/cart/cartsSlice';
 import { SelectAllCart } from '../../../feature/cart/cartsSlice';
 import "./cart.scss"
 import '../../animation.scss'
-function Cart() {
+function Cart() : JSX.Element {
 
   const carts = useSelector(SelectAllCart);
   
   const dispatch = useDispatch();
-  const filteredCarts =  carts.filter((item, index) => carts.indexOf(item) === index);
+  const filteredCarts =  carts.filter((item: any, index:number) => carts.indexOf(item) === index);
    
-  const toatalPrice= (card)=>{
-    const newArray = carts.filter((item) => item.id === card.id);
+  const toatalPrice= (card : any)=>{
+    const newArray = carts.filter((item:any) => item.id === card.id);
     const ArrayLength = newArray.length;
     const totalPrice  = ArrayLength*card.price;
     return totalPrice;
   }
-  const subtotal = Math.round(filteredCarts.reduce((acc, card) => {
+  const subtotal = Math.round(filteredCarts.reduce((acc :number, card :any) => {
     return acc + toatalPrice(card);
   }, 0));
   const taxRate = 0.05; // 5% tax rate
@@ -28,16 +28,16 @@ function Cart() {
   console.log(filteredCarts)
  
 
-  const onRemoveClick = (card) => { 
+  const onRemoveClick = (card : number) => { 
   dispatch(removeItem(card));
   }
 
-  const minOnClick =(card)=>{
+  const minOnClick =(card: any)=>{
     dispatch(removeItem(card))
 
 
   }
-  const plusOnClick =(card)=>{
+  const plusOnClick =(card :any)=>{
     console.log({card})
     dispatch(addItem(card))
 }
@@ -45,7 +45,7 @@ function Cart() {
   
   return (
 <div className= "product">
-     <div class="column-labels">
+     <div className="column-labels">
         <label className="product-image">Image</label>
         <label className="product-details">Product</label>
         <label className="product-price">Price</label>
@@ -55,10 +55,10 @@ function Cart() {
      </div>  
      {console.log({filteredCarts})}
     {
-      filteredCarts.map((card)=>{
+      filteredCarts.map((card:any)=>{
         return(
        <div className ="product" >
-         <div class="shopping-cart fade-left">
+         <div className="shopping-cart fade-left">
 
               <div className="product-image"><img src ={card.image}/></div>
 
@@ -67,18 +67,18 @@ function Cart() {
               <p className = "product-description">{card.description} </p>
               </div>
               <div className = "product-price">{card.price}</div>
-              <div class="product-quantity">
+              <div className="product-quantity">
               <button className = "Counter" onClick={() => minOnClick(card.id)}>-</button>
               <input type="text"   value={(() => {
-              const newArray = carts.filter((item) => item.id === card.id);
+              const newArray = carts.filter((item : any) => item.id === card.id);
              return newArray.length;
       })()}/>
               <button className="Counter" onClick={() => plusOnClick(card)}>+</button>
             </div>
-              <div class="product-removal">
-               <button class="remove-product" onClick= {() => onRemoveClick(card.id)}>Remove</button>
+              <div className="product-removal">
+               <button className="remove-product" onClick= {() => onRemoveClick(card.id)}>Remove</button>
               </div>
-              <div class="product-line-price">{Math.round(toatalPrice(card)) }</div>
+              <div className="product-line-price">{Math.round(toatalPrice(card)) }</div>
 
               </div>
 
@@ -88,26 +88,26 @@ function Cart() {
       })
     }
 
-<div class="totals">
-             <div class="totals-item">
+<div className="totals">
+             <div className="totals-item">
             <label>Subtotal</label>
-            <div class="totals-value" id="cart-subtotal">{subtotal}</div>
+            <div className="totals-value" id="cart-subtotal">{subtotal}</div>
             </div>
-    <div class="totals-item">
+    <div className="totals-item">
       <label>Tax (5%)</label>
-      <div class="totals-value" id="cart-tax">{tax}</div>
+      <div className="totals-value" id="cart-tax">{tax}</div>
     </div>
-    <div class="totals-item">
+    <div className="totals-item">
       <label>Shipping</label>
-      <div class="totals-value" id="cart-shipping">15.00</div>
+      <div className="totals-value" id="cart-shipping">15.00</div>
     </div>
-    <div class="totals-item totals-item-total">
+    <div className="totals-item totals-item-total">
       <label>Grand Total</label>
-      <div class="totals-value" id="cart-total">{grandTotal}</div>
+      <div className="totals-value" id="cart-total">{grandTotal}</div>
     </div>
   </div>
       
-      <button class="checkout">Checkout</button>
+      <button className="checkout">Checkout</button>
 
 </div>
   )
