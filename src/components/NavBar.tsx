@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { SelectAllCart } from '../feature/cart/cartsSlice'
 
-function NavBar() {
+function NavBar()  : JSX.Element{
   
   const cart  = useSelector(SelectAllCart);
   return (

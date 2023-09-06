@@ -5,12 +5,21 @@ import { styled } from 'styled-components';
 import { addItem } from '../../feature/cart/cartsSlice';
 import '../animation.scss'
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-function Detail() {
+function Detail()  : JSX.Element {
 
-  const settings = {
+
+  interface ISetting {
+    dots : boolean, 
+    infinite : boolean,
+    speed : number, 
+    slidesToShow : number , 
+    slidesToScroll : number , 
+  }
+
+
+  const settings : ISetting = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -22,13 +31,13 @@ function Detail() {
   
 
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id } : any = useParams();
   const cards = useSelector(SelectAllCard);
-  const idNumber = parseInt(id, 10);
+  const idNumber : number = parseInt(id, 10);
 
-  const matchedCard = cards.find((card) => card.id === idNumber);
+  const matchedCard = cards.find((card:any) => card.id === idNumber);
 
-  const onAddHandler = (matchedCard)=>{
+  const onAddHandler = (matchedCard :any)=>{
     dispatch(addItem(matchedCard));
 
   }

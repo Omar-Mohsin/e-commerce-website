@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../Card-Component/Card'
-function Home() {
+function Home()  : JSX.Element{
   return (
     <div>
       <Card></Card>
