@@ -4,36 +4,40 @@ import { styled } from 'styled-components';
 import { fetchCards, SelectAllCard } from '../../feature/card/cardSlice';
 import { addItem, SelectAllCart } from '../../feature/cart/cartsSlice';
 import { Link } from 'react-router-dom';
+import { AnyAction } from '@reduxjs/toolkit';
 
-function Card() {
-  const dispatch = useDispatch();
+import { ThunkDispatch } from 'redux-thunk';
+
+interface CardProps {}
+
+function Card({}: CardProps): JSX.Element {
+  const dispatch: ThunkDispatch<RTCStatsType, unknown, AnyAction> = useDispatch();
   const cards = useSelector(SelectAllCard);
   const cart = useSelector(SelectAllCart);
-
   useEffect(() => {
     dispatch(fetchCards());
   }, [dispatch]);
 
-  const addOnCart = (card) => {
+  const addOnCart = (card: any) => {
     dispatch(addItem(card));
   };
 
   return (
     <Container className="fade-in">
-      {cards.map((card) => (
+      {cards.map((card :any) => (
         <CardItem key={card.id}>
           <Link to={`/Detile/${card?.id}`}>
             <ImageContainer>
               <img src={card.image} alt={card.title} />
             </ImageContainer>
           </Link>
-          {cart.filter((item) => item.id === card.id).length > 0 && (
+          {cart.filter((item :any) => item.id === card.id).length > 0 && (
             <CartItemCount>
-              {cart.filter((item) => item.id === card.id).length}
+              {cart.filter((item:any) => item.id === card.id).length}
             </CartItemCount>
           )}
-            <h5>{card.title}</h5>
-            <Price>${card.price}</Price>
+          <h5>{card.title}</h5>
+          <Price>${card.price}</Price>
           <AddToCartButton onClick={() => addOnCart(card)}>
             Add to Cart
           </AddToCartButton>
@@ -115,14 +119,13 @@ const CartItemCount = styled.p`
 `;
 
 const Price = styled.p`
-  font-size: 1.8rem; /* Increase font size */
+  font-size: 1.8rem;
   text-align: center;
   margin: 0;
   padding: 8px 16px;
-  color: #ff5733; /* A contrasting color */
+  color: #ff5733;
   border-radius: 25px;
 `;
-
 
 const AddToCartButton = styled.button`
   cursor: pointer;
