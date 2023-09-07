@@ -6,18 +6,28 @@ import "./cart.scss"
 import '../../animation.scss'
 function Cart() : JSX.Element {
 
+
+  interface CardItem {
+    id  :  number , 
+    title : string, 
+    price : number , 
+    image  : string ,
+    description : string,
+  }
+
+
   const carts = useSelector(SelectAllCart);
   
   const dispatch = useDispatch();
-  const filteredCarts =  carts.filter((item: any, index:number) => carts.indexOf(item) === index);
+  const filteredCarts =  carts.filter((item: CardItem, index:number) => carts.indexOf(item) === index);
    
-  const toatalPrice= (card : any)=>{
+  const toatalPrice= (card : CardItem)=>{
     const newArray = carts.filter((item:any) => item.id === card.id);
     const ArrayLength = newArray.length;
     const totalPrice  = ArrayLength*card.price;
     return totalPrice;
   }
-  const subtotal = Math.round(filteredCarts.reduce((acc :number, card :any) => {
+  const subtotal = Math.round(filteredCarts.reduce((acc :number, card :CardItem) => {
     return acc + toatalPrice(card);
   }, 0));
   const taxRate = 0.05; // 5% tax rate
@@ -32,12 +42,12 @@ function Cart() : JSX.Element {
   dispatch(removeItem(card));
   }
 
-  const minOnClick =(card: any)=>{
+  const minOnClick =(card: number)=>{
     dispatch(removeItem(card))
 
 
   }
-  const plusOnClick =(card :any)=>{
+  const plusOnClick =(card :CardItem)=>{
     console.log({card})
     dispatch(addItem(card))
 }
@@ -55,7 +65,7 @@ function Cart() : JSX.Element {
      </div>  
      {console.log({filteredCarts})}
     {
-      filteredCarts.map((card:any)=>{
+      filteredCarts.map((card:CardItem)=>{
         return(
        <div className ="product" >
          <div className="shopping-cart fade-left">

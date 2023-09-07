@@ -8,9 +8,16 @@ import { AnyAction } from '@reduxjs/toolkit';
 
 import { ThunkDispatch } from 'redux-thunk';
 
-interface CardProps {}
 
-function Card({}: CardProps): JSX.Element {
+
+interface CardItem {
+  id : number , 
+  image : string,
+  title :  string, 
+  price :  number 
+}
+
+function Card(): JSX.Element {
   const dispatch: ThunkDispatch<RTCStatsType, unknown, AnyAction> = useDispatch();
   const cards = useSelector(SelectAllCard);
   const cart = useSelector(SelectAllCart);
@@ -18,22 +25,22 @@ function Card({}: CardProps): JSX.Element {
     dispatch(fetchCards());
   }, [dispatch]);
 
-  const addOnCart = (card: any) => {
+  const addOnCart = (card: CardItem) => {
     dispatch(addItem(card));
   };
 
   return (
     <Container className="fade-in">
-      {cards.map((card :any) => (
+      {cards.map((card :CardItem) => (
         <CardItem key={card.id}>
           <Link to={`/Detile/${card?.id}`}>
             <ImageContainer>
               <img src={card.image} alt={card.title} />
             </ImageContainer>
           </Link>
-          {cart.filter((item :any) => item.id === card.id).length > 0 && (
+          {cart.filter((item :CardItem) => item.id === card.id).length > 0 && (
             <CartItemCount>
-              {cart.filter((item:any) => item.id === card.id).length}
+              {cart.filter((item:CardItem) => item.id === card.id).length}
             </CartItemCount>
           )}
           <h5>{card.title}</h5>
