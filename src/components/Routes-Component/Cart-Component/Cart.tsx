@@ -7,7 +7,7 @@ import '../../animation.scss'
 function Cart() : JSX.Element {
 
 
-  interface CardItem {
+  interface Product {
     id  :  number , 
     title : string, 
     price : number , 
@@ -19,15 +19,15 @@ function Cart() : JSX.Element {
   const carts = useSelector(SelectAllCart);
   
   const dispatch = useDispatch();
-  const filteredCarts =  carts.filter((item: CardItem, index:number) => carts.indexOf(item) === index);
+  const filteredCarts =  carts.filter((item: Product, index:number) => carts.indexOf(item) === index);
    
-  const toatalPrice= (card : CardItem)=>{
+  const toatalPrice= (card : Product)=>{
     const newArray = carts.filter((item:any) => item.id === card.id);
     const ArrayLength = newArray.length;
     const totalPrice  = ArrayLength*card.price;
     return totalPrice;
   }
-  const subtotal = Math.round(filteredCarts.reduce((acc :number, card :CardItem) => {
+  const subtotal = Math.round(filteredCarts.reduce((acc :number, card :Product) => {
     return acc + toatalPrice(card);
   }, 0));
   const taxRate = 0.05; // 5% tax rate
@@ -47,7 +47,7 @@ function Cart() : JSX.Element {
 
 
   }
-  const plusOnClick =(card :CardItem)=>{
+  const plusOnClick =(card :Product)=>{
     console.log({card})
     dispatch(addItem(card))
 }
@@ -65,7 +65,7 @@ function Cart() : JSX.Element {
      </div>  
      {console.log({filteredCarts})}
     {
-      filteredCarts.map((card:CardItem)=>{
+      filteredCarts.map((card:Product)=>{
         return(
        <div className ="product" >
          <div className="shopping-cart fade-left">

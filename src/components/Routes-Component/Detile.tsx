@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 function Detail()  : JSX.Element {
 
 
-  interface CardItem {
+  interface Product {
     id :  number , 
     title : string , 
     description :  string , 
@@ -43,9 +43,9 @@ function Detail()  : JSX.Element {
   const cards = useSelector(SelectAllCard);
   const idNumber : number = parseInt(id, 10);
 
-  const matchedCard = cards.find((card:CardItem) => card.id === idNumber);
+  const matchedCard = cards.find((card:Product) => card.id === idNumber);
 
-  const onAddHandler = (matchedCard :CardItem)=>{
+  const onAddHandler = (matchedCard :Product)=>{
     dispatch(addItem(matchedCard));
 
   }

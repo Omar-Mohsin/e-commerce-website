@@ -32,6 +32,7 @@ extraReducers(builder) {
           });
     }
 })
+export const { reducer: cardReducer } = cardSlice;
 
 
 export const SelectAllCard = (state)=> {

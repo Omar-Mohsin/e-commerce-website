@@ -10,7 +10,7 @@ import { ThunkDispatch } from 'redux-thunk';
 
 
 
-interface CardItem {
+interface Product {
   id : number , 
   image : string,
   title :  string, 
@@ -25,22 +25,22 @@ function Card(): JSX.Element {
     dispatch(fetchCards());
   }, [dispatch]);
 
-  const addOnCart = (card: CardItem) => {
+  const addOnCart = (card: Product) => {
     dispatch(addItem(card));
   };
 
   return (
     <Container className="fade-in">
-      {cards.map((card :CardItem) => (
+      {cards.map((card :Product) => (
         <CardItem key={card.id}>
           <Link to={`/Detile/${card?.id}`}>
             <ImageContainer>
               <img src={card.image} alt={card.title} />
             </ImageContainer>
           </Link>
-          {cart.filter((item :CardItem) => item.id === card.id).length > 0 && (
+          {cart.filter((item :Product) => item.id === card.id).length > 0 && (
             <CartItemCount>
-              {cart.filter((item:CardItem) => item.id === card.id).length}
+              {cart.filter((item:Product) => item.id === card.id).length}
             </CartItemCount>
           )}
           <h5>{card.title}</h5>
