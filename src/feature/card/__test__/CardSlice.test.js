@@ -49,7 +49,7 @@ const mockResponse = {
         error: null,
         cartItem : [],
         cart: {
-            cartItems: [], // Set your desired initial state here
+            cartItems: [],
           },
       };
     const store = mockStore(initialState);
