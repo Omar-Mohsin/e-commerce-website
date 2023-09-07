@@ -67,7 +67,7 @@ function Cart() : JSX.Element {
     {
       filteredCarts.map((card:Product)=>{
         return(
-       <div className ="product" >
+       <div className ="product" key={card.id} >
          <div className="shopping-cart fade-left">
 
               <div className="product-image"><img src ={card.image}/></div>
