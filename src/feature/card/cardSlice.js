@@ -36,7 +36,6 @@ export const { reducer: cardReducer } = cardSlice;
 
 
 export const SelectAllCard = (state)=> {
-    // console.log(state, 'state')
     return state.card.card
 }
 export default cardSlice.reducer;

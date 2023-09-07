@@ -31,25 +31,29 @@ function Card(): JSX.Element {
 
   return (
     <Container className="fade-in">
-      {cards.map((card :Product) => (
-        <CardItem key={card.id}>
-          <Link to={`/Detile/${card?.id}`}>
-            <ImageContainer>
-              <img src={card.image} alt={card.title} />
-            </ImageContainer>
-          </Link>
-          {cart.filter((item :Product) => item.id === card.id).length > 0 && (
-            <CartItemCount>
-              {cart.filter((item:Product) => item.id === card.id).length}
-            </CartItemCount>
-          )}
-          <h5>{card.title}</h5>
-          <Price>${card.price}</Price>
-          <AddToCartButton onClick={() => addOnCart(card)}>
-            Add to Cart
-          </AddToCartButton>
-        </CardItem>
-      ))}
+      {cards ? (
+        cards.map((card: Product) => (
+          <CardItem key={card.id} data-test-id="product">
+            <Link to={`/Detile/${card?.id}`}>
+              <ImageContainer>
+                <img src={card.image} alt={card.title} />
+              </ImageContainer>
+            </Link>
+            {cart.filter((item: Product) => item.id === card.id).length > 0 && (
+              <CartItemCount>
+                {cart.filter((item: Product) => item.id === card.id).length}
+              </CartItemCount>
+            )}
+            <h5>{card.title}</h5>
+            <Price>${card.price}</Price>
+            <AddToCartButton onClick={() => addOnCart(card)}>
+              Add to Cart
+            </AddToCartButton>
+          </CardItem>
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </Container>
   );
 }
