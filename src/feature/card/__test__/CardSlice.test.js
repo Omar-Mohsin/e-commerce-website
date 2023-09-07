@@ -1,10 +1,7 @@
 import axios from 'axios'
 import { render, waitFor, screen } from "@testing-library/react";
-import thunk from 'redux-thunk';
 import Card from '../../../components/Card-Component/Card';
-import React from 'react';
 import { Provider } from 'react-redux'; // Import Provider
-import store from '../../../app/store'
 import configureStore from 'redux-mock-store';
 
 jest.mock('axios')
