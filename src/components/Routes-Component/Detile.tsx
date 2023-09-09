@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { SelectAllCard } from '../../feature/card/cardSlice';
+import { SelectAllProducts } from '../../feature/product/productSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
 import { addItem } from '../../feature/cart/cartsSlice';
@@ -40,13 +40,13 @@ function Detail()  : JSX.Element {
 
   const dispatch = useDispatch();
   const { id } : any = useParams();
-  const cards = useSelector(SelectAllCard);
+  const products = useSelector(SelectAllProducts);
   const idNumber : number = parseInt(id, 10);
 
-  const matchedCard = cards.find((card:Product) => card.id === idNumber);
+  const matchedProduct = products.find((product:Product) => product.id === idNumber);
 
-  const onAddHandler = (matchedCard :Product)=>{
-    dispatch(addItem(matchedCard));
+  const onAddHandler = (matchedProduct :Product)=>{
+    dispatch(addItem(matchedProduct));
 
   }
 
@@ -55,7 +55,7 @@ function Detail()  : JSX.Element {
     <ImageContainer>
       <Slider {...settings}>
         <ImageContainer>
-          <img src={matchedCard.image} alt={matchedCard.title} />
+          <img src={matchedProduct.image} alt={matchedProduct.title} />
         </ImageContainer>
         <div>
           <h3>2</h3>
@@ -75,10 +75,10 @@ function Detail()  : JSX.Element {
       </Slider>
     </ImageContainer>
     <Content>
-      <Title>{matchedCard.title}</Title>
-      <Description>{matchedCard.description}</Description>
-      <Price>${matchedCard.price}</Price>
-      <AddToCartButton onClick={() => onAddHandler(matchedCard)}>ADD TO CART</AddToCartButton>
+      <Title>{matchedProduct.title}</Title>
+      <Description>{matchedProduct.description}</Description>
+      <Price>${matchedProduct.price}</Price>
+      <AddToCartButton onClick={() => onAddHandler(matchedProduct)}>ADD TO CART</AddToCartButton>
     </Content>
   </Container>
   );

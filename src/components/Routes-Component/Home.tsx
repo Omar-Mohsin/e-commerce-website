@@ -1,9 +1,9 @@
 import React from 'react'
-import Card from '../Card-Component/Card'
+import Product from '../Product-Component/Product'
 function Home()  : JSX.Element{
   return (
     <div>
-      <Card></Card>
+      <Product></Product>
 
     </div>
   )

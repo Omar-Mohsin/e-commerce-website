@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
-import { fetchCards, SelectAllCard } from '../../feature/card/cardSlice';
 import { addItem, SelectAllCart } from '../../feature/cart/cartsSlice';
+import { SelectAllProducts , fetchProducts } from '../../feature/product/productSlice';
 import { Link } from 'react-router-dom';
 import { AnyAction } from '@reduxjs/toolkit';
 
@@ -17,36 +17,38 @@ interface Product {
   price :  number 
 }
 
-function Card(): JSX.Element {
+function Product(): JSX.Element {
   const dispatch: ThunkDispatch<RTCStatsType, unknown, AnyAction> = useDispatch();
-  const cards = useSelector(SelectAllCard);
+  const Products = useSelector(SelectAllProducts);
   const cart = useSelector(SelectAllCart);
   useEffect(() => {
-    dispatch(fetchCards());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
-  const addOnCart = (card: Product) => {
-    dispatch(addItem(card));
+
+  console.log(Products);
+  const addOnCart = (product: Product) => {
+    dispatch(addItem(product));
   };
 
   return (
     <Container className="fade-in">
-      {cards ? (
-        cards.map((card: Product) => (
-          <CardItem key={card.id} data-test-id="product">
-            <Link to={`/Detile/${card?.id}`}>
+      {Products ? (
+        Products.map((product: Product) => (
+          <CardItem key={product.id} data-test-id="product">
+            <Link to={`/Detile/${product?.id}`}>
               <ImageContainer>
-                <img src={card.image} alt={card.title} />
+                <img src={product.image} alt={product.title} />
               </ImageContainer>
             </Link>
-            {cart.filter((item: Product) => item.id === card.id).length > 0 && (
+            {cart.filter((item: Product) => item.id === product.id).length > 0 && (
               <CartItemCount>
-                {cart.filter((item: Product) => item.id === card.id).length}
+                {cart.filter((item: Product) => item.id === product.id).length}
               </CartItemCount>
             )}
-            <h5>{card.title}</h5>
-            <Price>${card.price}</Price>
-            <AddToCartButton onClick={() => addOnCart(card)}>
+            <h5>{product.title}</h5>
+            <Price>${product.price}</Price>
+            <AddToCartButton onClick={() => addOnCart(product)}>
               Add to Cart
             </AddToCartButton>
           </CardItem>
@@ -58,7 +60,7 @@ function Card(): JSX.Element {
   );
 }
 
-export default Card;
+export default Product;
 
 const Container = styled.div`
   background-color: #f7f7f7;

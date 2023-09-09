@@ -38,18 +38,17 @@ function Cart() : JSX.Element {
   console.log(filteredCarts)
  
 
-  const onRemoveClick = (card : number) => { 
-  dispatch(removeItem(card));
+  const onRemoveClick = (product : number) => { 
+  dispatch(removeItem(product));
   }
 
-  const minOnClick =(card: number)=>{
-    dispatch(removeItem(card))
+  const minOnClick =(product: number)=>{
+    dispatch(removeItem(product))
 
 
   }
-  const plusOnClick =(card :Product)=>{
-    console.log({card})
-    dispatch(addItem(card))
+  const plusOnClick =(product :Product)=>{
+    dispatch(addItem(product))
 }
   
   
@@ -65,30 +64,30 @@ function Cart() : JSX.Element {
      </div>  
      {console.log({filteredCarts})}
     {
-      filteredCarts.map((card:Product)=>{
+      filteredCarts.map((product:Product)=>{
         return(
-       <div className ="product" key={card.id} >
+       <div className ="product" key={product.id} >
          <div className="shopping-cart fade-left">
 
-              <div className="product-image"><img src ={card.image}/></div>
+              <div className="product-image"><img src ={product.image}/></div>
 
               <div className="product-details"> 
-              <div className = "product-title">{card.title}</div>
-              <p className = "product-description">{card.description} </p>
+              <div className = "product-title">{product.title}</div>
+              <p className = "product-description">{product.description} </p>
               </div>
-              <div className = "product-price">{card.price}</div>
+              <div className = "product-price">{product.price}</div>
               <div className="product-quantity">
-              <button className = "Counter" onClick={() => minOnClick(card.id)}>-</button>
+              <button className = "Counter" onClick={() => minOnClick(product.id)}>-</button>
               <input type="text"   value={(() => {
-              const newArray = carts.filter((item : any) => item.id === card.id);
+              const newArray = carts.filter((item : any) => item.id === product.id);
              return newArray.length;
       })()}/>
-              <button className="Counter" onClick={() => plusOnClick(card)}>+</button>
+              <button className="Counter" onClick={() => plusOnClick(product)}>+</button>
             </div>
               <div className="product-removal">
-               <button className="remove-product" onClick= {() => onRemoveClick(card.id)}>Remove</button>
+               <button className="remove-product" onClick= {() => onRemoveClick(product.id)}>Remove</button>
               </div>
-              <div className="product-line-price">{Math.round(toatalPrice(card)) }</div>
+              <div className="product-line-price">{Math.round(toatalPrice(product)) }</div>
 
               </div>
 
