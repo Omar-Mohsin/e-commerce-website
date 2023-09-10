@@ -4,6 +4,7 @@ import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { SelectAllCart } from '../feature/cart/cartsSlice'
 
@@ -22,10 +23,17 @@ function NavBar()  : JSX.Element{
     </Logos>
     </Link>
     <LeftNav>
+
+    {/* <Link to='/orders' style={{ textDecoration: 'none', color: 'black' }}><LocalShippingIcon></LocalShippingIcon></Link> */}
+
+    <Sign>
+    <Link to='/signIn' style={{ textDecoration: 'none', color: 'black' }}>sign-in</Link>
+    </Sign>
        <p>
        <Link to='/cart' style={{ textDecoration: 'none', color: 'black' }}><ShoppingCartIcon></ShoppingCartIcon></Link>
        <span>{cart.length}</span>
        </p>
+
 
 
     </LeftNav>
@@ -62,6 +70,8 @@ position: fixed; /* Set to fixed to make it stay at the top */
 `
 const LeftNav= styled.div`
 display: flex;
+ 
+align-items : center;
 
 p{
   
@@ -79,4 +89,13 @@ align-items : center;
 h3{
   margin-left : 10px;
 }
+`
+
+const Sign = styled.div`
+  
+ 
+  font-size : 23px;
+  font-family: 'Dancing Script', cursive;
+
+  margin-bottom : 9px;
 `

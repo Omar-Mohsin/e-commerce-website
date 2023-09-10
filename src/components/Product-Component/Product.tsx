@@ -46,7 +46,7 @@ function Product(): JSX.Element {
                 {cart.filter((item: Product) => item.id === product.id).length}
               </CartItemCount>
             )}
-            <h5>{product.title}</h5>
+            <ProductTile>{product.title}</ProductTile>
             <Price>${product.price}</Price>
             <AddToCartButton onClick={() => addOnCart(product)}>
               Add to Cart
@@ -154,4 +154,15 @@ const AddToCartButton = styled.button`
     background-color: #fff;
     color: #000;
   }
+
+`
+const ProductTile = styled.p`
+
+  font-weight : bold;
+
+  
+
+
 `;
+
+;

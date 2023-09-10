@@ -4,6 +4,7 @@ import { addItem , removeItem } from '../../../feature/cart/cartsSlice';
 import { SelectAllCart } from '../../../feature/cart/cartsSlice';
 import "./cart.scss"
 import '../../animation.scss'
+import { Link } from 'react-router-dom';
 function Cart() : JSX.Element {
 
 
@@ -53,7 +54,9 @@ function Cart() : JSX.Element {
   
   
   return (
+
 <div className= "product">
+
      <div className="column-labels">
         <label className="product-image">Image</label>
         <label className="product-details">Product</label>
@@ -96,8 +99,8 @@ function Cart() : JSX.Element {
         )
       })
     }
-
 <div className="totals">
+     
              <div className="totals-item">
             <label>Subtotal</label>
             <div className="totals-value" id="cart-subtotal">{subtotal}</div>
@@ -116,7 +119,11 @@ function Cart() : JSX.Element {
     </div>
   </div>
       
-      <button className="checkout">Checkout</button>
+      <Link to ='/orders'><button className="checkout">Checkout</button></Link>
+     
+
+      
+
 
 </div>
   )
