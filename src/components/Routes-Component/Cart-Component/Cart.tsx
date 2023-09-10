@@ -21,14 +21,14 @@ function Cart() : JSX.Element {
   const dispatch = useDispatch();
   const filteredCarts =  carts.filter((item: Product, index:number) => carts.indexOf(item) === index);
    
-  const toatalPrice= (card : Product)=>{
-    const newArray = carts.filter((item:any) => item.id === card.id);
+  const toatalPrice= (product : Product)=>{
+    const newArray = carts.filter((item:Product) => item.id === product.id);
     const ArrayLength = newArray.length;
-    const totalPrice  = ArrayLength*card.price;
+    const totalPrice  = ArrayLength*product.price;
     return totalPrice;
   }
-  const subtotal = Math.round(filteredCarts.reduce((acc :number, card :Product) => {
-    return acc + toatalPrice(card);
+  const subtotal = Math.round(filteredCarts.reduce((acc :number, product :Product) => {
+    return acc + toatalPrice(product);
   }, 0));
   const taxRate = 0.05; // 5% tax rate
   const tax = Math.round(subtotal * taxRate);
