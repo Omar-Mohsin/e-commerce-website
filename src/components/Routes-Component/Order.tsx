@@ -44,7 +44,7 @@ function Order() {
           <InputLabel htmlFor='location'>Location:</InputLabel>
           <InputField required placeholder='ex: Amman' />
         </FormGroup>
-        <SubmitButton type='button' onClick={onClickHandler}>
+        <SubmitButton type='submit' onClick={onClickHandler}>
           Click to Order
         </SubmitButton>
         <OrderStatus>{ordered}</OrderStatus>

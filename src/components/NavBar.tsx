@@ -27,7 +27,7 @@ function NavBar()  : JSX.Element{
     {/* <Link to='/orders' style={{ textDecoration: 'none', color: 'black' }}><LocalShippingIcon></LocalShippingIcon></Link> */}
 
     <Sign>
-    <Link to='/signIn' style={{ textDecoration: 'none', color: 'black' }}>sign-in</Link>
+    <Link to='/signIn' style={{ textDecoration: 'none', color: 'black', }}>sign-in</Link>
     </Sign>
        <p>
        <Link to='/cart' style={{ textDecoration: 'none', color: 'black' }}><ShoppingCartIcon></ShoppingCartIcon></Link>
@@ -94,7 +94,7 @@ h3{
 const Sign = styled.div`
   
  
-  font-size : 23px;
+  font-size : 26px;
   font-family: 'Dancing Script', cursive;
 
   margin-bottom : 9px;
