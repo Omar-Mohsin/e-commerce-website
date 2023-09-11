@@ -101,8 +101,8 @@ const CardItem = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   overflow: hidden;
-  width: 150px;
-  height: 150px;
+  width: 140px;
+  height: 140px;
   margin-bottom: 10px;
   border-radius: 10px;
 

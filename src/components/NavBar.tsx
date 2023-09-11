@@ -7,10 +7,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { SelectAllCart } from '../feature/cart/cartsSlice'
+import { SelectStatus } from '../feature/auth/authSlice'
+
 
 function NavBar()  : JSX.Element{
   
   const cart  = useSelector(SelectAllCart);
+  const status = useSelector(SelectStatus);
+
   return (
     <>
 
@@ -26,9 +30,20 @@ function NavBar()  : JSX.Element{
 
     {/* <Link to='/orders' style={{ textDecoration: 'none', color: 'black' }}><LocalShippingIcon></LocalShippingIcon></Link> */}
 
-    <Sign>
-    <Link to='/signIn' style={{ textDecoration: 'none', color: 'black', }}>sign-in</Link>
-    </Sign>
+   
+      {status ? (
+         <Sign>
+         <Link to='/profile' style={{ textDecoration: 'none', color: 'black', }}>profile</Link>
+         </Sign>
+      ):(
+         
+          <Sign>
+          <Link to='/signIn' style={{ textDecoration: 'none', color: 'black', }}>sign-in</Link>
+          </Sign>                   
+
+    
+    )}
+    
        <p>
        <Link to='/cart' style={{ textDecoration: 'none', color: 'black' }}><ShoppingCartIcon></ShoppingCartIcon></Link>
        <span>{cart.length}</span>

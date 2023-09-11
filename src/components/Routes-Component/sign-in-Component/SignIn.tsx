@@ -1,17 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useEffect } from 'react';
-import { getRedirectResult } from 'firebase/auth';
-import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../../utils/firebase/firebase.utils';
 
+import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../../utils/firebase/firebase.utils';
+import { setUser ,SelectStatus,SelectUser  } from '../../../feature/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { render } from 'react-dom';
+import { Link } from 'react-router-dom';
 function SignIn() {
+
+
+  const dispatch = useDispatch();
   const logGoogleUser = async () => {
+
+    try{
     const { user } = await signInWithGooglePopup();
     createUserDocumentFromAuth(user);
+    console.log('user : ' , user.displayName)
+    dispatch(setUser(user.displayName));
+    } catch(error){
+      console.log(error);
+    }
   };
 
+  
   return (
-    <CenteredContainer>
+    <Container>
       <Card>
         <Title>
 
@@ -20,17 +33,18 @@ function SignIn() {
          
           <p>Click the button to sign in</p>
        
-        <CardActions>
-          <GoogleSignInButton onClick={logGoogleUser}>Sign in with Google</GoogleSignInButton>
-        </CardActions>
+        <ButtonContainer>
+
+        <Link to ='/profile'>  <GoogleSignInButton onClick={logGoogleUser}>Sign in with Google</GoogleSignInButton></Link>
+        </ButtonContainer>
       </Card>
-    </CenteredContainer>
+    </Container>
   );
 }
 
 export default SignIn;
 
-const CenteredContainer = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,7 +90,7 @@ const Title  = styled.div`
     
 `
 
-const CardActions = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,13 +102,13 @@ const GoogleSignInButton = styled.button`
   font-family: 'Dancing Script', cursive;
   font-size : 24px;
   padding: 10px 20px;
-  background-color: #4285f4; /* Google Blue Color */
+  background-color: #4285f4; 
   color: white;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   margin-top:  150px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
 
   &:hover {
     background-color: #ffff;
