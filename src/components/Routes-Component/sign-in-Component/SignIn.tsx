@@ -33,10 +33,10 @@ function SignIn() {
          
           <p>Click the button to sign in</p>
        
-        <ButtonContainer>
+  
 
-        <Link to ='/profile'>  <GoogleSignInButton onClick={logGoogleUser}>Sign in with Google</GoogleSignInButton></Link>
-        </ButtonContainer>
+        <Link to ='/profile' style={{ textDecoration: 'none' }}>  <GoogleSignInButton onClick={logGoogleUser}>Sign in with Google</GoogleSignInButton></Link>
+    
       </Card>
     </Container>
   );

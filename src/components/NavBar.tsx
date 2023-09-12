@@ -2,16 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { SelectAllCart } from '../feature/cart/cartsSlice'
-import { SelectStatus } from '../feature/auth/authSlice'
+import { SelectStatus , signOut } from '../feature/auth/authSlice'
 
 
 function NavBar()  : JSX.Element{
   
+  const dispatch  = useDispatch();
+  const onClickHandler = ()=>{
+    dispatch(signOut(null))
+  }
   const cart  = useSelector(SelectAllCart);
   const status = useSelector(SelectStatus);
 
@@ -34,11 +38,12 @@ function NavBar()  : JSX.Element{
       {status ? (
          <Sign>
          <Link to='/profile' style={{ textDecoration: 'none', color: 'black', }}>profile</Link>
+        <Link to= '/' style={{ textDecoration: 'none', color: 'black', }}><p onClick={onClickHandler} >logout</p></Link>
          </Sign>
       ):(
          
           <Sign>
-          <Link to='/signIn' style={{ textDecoration: 'none', color: 'black', }}>sign-in</Link>
+          <Link to='/signIn' style={{ textDecoration: 'none', color: 'black', }}><p>sign-in</p></Link>
           </Sign>                   
 
     
@@ -105,12 +110,11 @@ h3{
   margin-left : 10px;
 }
 `
-
 const Sign = styled.div`
-  
- 
-  font-size : 26px;
+  display: flex;
+  font-size: 26px;
   font-family: 'Dancing Script', cursive;
+  margin-bottom: 9px;
 
-  margin-bottom : 9px;
+  
 `
