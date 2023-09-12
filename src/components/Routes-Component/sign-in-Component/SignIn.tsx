@@ -15,8 +15,9 @@ function SignIn() {
     try{
     const { user } = await signInWithGooglePopup();
     createUserDocumentFromAuth(user);
-    console.log('user : ' , user.displayName)
-    dispatch(setUser(user.displayName));
+
+    console.log(user);
+    dispatch(setUser(user));
     } catch(error){
       console.log(error);
     }

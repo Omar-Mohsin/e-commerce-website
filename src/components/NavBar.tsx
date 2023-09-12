@@ -32,12 +32,13 @@ function NavBar()  : JSX.Element{
     </Link>
     <LeftNav>
 
-    {/* <Link to='/orders' style={{ textDecoration: 'none', color: 'black' }}><LocalShippingIcon></LocalShippingIcon></Link> */}
-
+    
    
       {status ? (
          <Sign>
          <Link to='/profile' style={{ textDecoration: 'none', color: 'black', }}>profile</Link>
+
+          <Link to='/orders' style={{ textDecoration: 'none', color: 'black'  , marginLeft :40, marginRight :10}}>Orders</Link> 
         <Link to= '/' style={{ textDecoration: 'none', color: 'black', }}><p onClick={onClickHandler} >logout</p></Link>
          </Sign>
       ):(

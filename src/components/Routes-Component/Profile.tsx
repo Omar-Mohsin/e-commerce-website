@@ -3,7 +3,6 @@ import { styled } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { SelectUser, signOut, SelectStatus } from '../../feature/auth/authSlice';
 import { Link } from 'react-router-dom';
-
 export default function Profile() {
   const user = useSelector(SelectUser);
   const status = useSelector(SelectStatus);
@@ -16,7 +15,7 @@ export default function Profile() {
   return (
     <Container>
       <ProfileHeader>
-        <ProfileImage src="" />
+        <ProfileImage src='https://robohash.org/1?set=set2' />
         <ProfileInfo>
           <WelcomeMessage>
             Welcome, <UserName>{user}</UserName>
@@ -24,6 +23,9 @@ export default function Profile() {
         </ProfileInfo>
       </ProfileHeader>
       <Navigation>
+      <Link to="/">
+          <StyledButton>Store</StyledButton>
+        </Link>
         <Link to="/cart">
           <StyledButton>My Cart</StyledButton>
         </Link>

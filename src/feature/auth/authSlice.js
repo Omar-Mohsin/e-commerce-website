@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     user : null,
+    id : null,
     status  : false,
 }
 export const authSlice = createSlice({
@@ -13,13 +14,17 @@ reducers :{
 
     setUser: {
     reducer (state, action){
-        state.user = action.payload;
+        state.user = action.payload.displayName;
         state.status  = true;
+        state.id = action.payload.uid;
+
     }},
     signOut: {
         reducer (state , action){
             state.user = action.payload;
             state.status  = false;
+            state.id = action.payload
+
         }},
 
 }, 
@@ -36,6 +41,10 @@ export const SelectStatus =(state)=>{
 }
 export const SelectUser =(state)=>{
     return state.auth.user;
+
+}
+export const SelectId =(state)=>{
+    return state.auth.id;
 
 }
 

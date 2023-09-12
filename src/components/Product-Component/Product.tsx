@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
+import { Button } from '@mui/material';
 import { addItem, SelectAllCart } from '../../feature/cart/cartsSlice';
 import { SelectAllProducts , fetchProducts } from '../../feature/product/productSlice';
+import { ShoppingCartRounded } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { AnyAction } from '@reduxjs/toolkit';
 
@@ -49,7 +51,7 @@ function Product(): JSX.Element {
             <ProductTile>{product.title}</ProductTile>
             <Price>${product.price}</Price>
             <AddToCartButton onClick={() => addOnCart(product)}>
-              Add to Cart
+              ADD TO CART
             </AddToCartButton>
           </CardItem>
         ))
@@ -148,6 +150,7 @@ const AddToCartButton = styled.button`
   border: none;
   border-radius: 5px;
   font-size: 1.2rem;
+  justify-content : center;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
