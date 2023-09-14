@@ -8,10 +8,10 @@ import Detile from "./components/Routes-Component/Detile";
 import Order from './components/Routes-Component/Order';
 import SignIn from './components/Routes-Component/sign-in-Component/SignIn';
 import Profile from './components/Routes-Component/Profile';
-import { SelectStatus } from './feature/auth/authSlice';
+import { SelectUser } from './feature/auth/authSlice';
 import { useSelector } from 'react-redux';
 function App()   {
-  const status =  useSelector(SelectStatus);
+  const user =  useSelector(SelectUser);
   return (
    <div>
     
@@ -25,7 +25,7 @@ function App()   {
        <Route path="/signIn" element={<SignIn />} />
        <Route
             path="/profile"
-            element={status ? <Profile /> : <Navigate to="" />} 
+            element={user ? <Profile /> : <Navigate to="" />} 
           />    </Route>
 
     </Routes>

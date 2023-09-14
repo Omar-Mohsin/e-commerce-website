@@ -1,10 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider ,signInWithPopup , signInWithRedirect} from 'firebase/auth'
-import {getFirestore , doc  , getDoc , setDoc , updateDoc} from 'firebase/firestore'
-import { useSelector } from "react-redux";
-import { SelectAllCart } from "../../feature/cart/cartsSlice";
-
+import {getFirestore , doc  , getDoc , setDoc , updateDoc , collection , addDoc , Timestamp} from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyAjq4YqXxiUOyMLPjRF1lS-spcN8DP5Abs",
@@ -28,9 +25,8 @@ provider.setCustomParameters({
 
 
 export const auth = getAuth();
-
-
 export const db = getFirestore();
+
 
 export const getUserCart = async (userId) => {
     try {
@@ -39,7 +35,7 @@ export const getUserCart = async (userId) => {
   
       if (userSnapshot.exists()) {
         const userData = userSnapshot.data();
-        return userData.cart || []; // Assuming cart is an array in the user's Firestore document
+        return userData.cart || []; 
       } else {
         console.log('User document does not exist');
         return []; // Return an empty array if the user document doesn't exist
@@ -60,10 +56,16 @@ export const updateCart = async (userId, products) => {
         const currentCart = userData.cart || [];
   
         // Add new products to the cart
-        const updatedCart = [...currentCart, ...products];
+        const updatedCart = [
+          ...currentCart,
+          {
+            products,
+            timestamp: new Date(), 
+          },
+        ];;
   
         // Update the cart in the Firestore document
-        await updateDoc(userDocRef, { cart: updatedCart });
+        await updateDoc(userDocRef, { cart: updatedCart});
   
         console.log('Cart updated successfully');
       } else {
@@ -73,12 +75,6 @@ export const updateCart = async (userId, products) => {
       console.error('Error updating cart:', error);
     }
   };
-  
-
-
-
-
-
 
 // this is for doc
  export const createUserDocumentFromAuth =  async (userAuth) =>{
@@ -91,10 +87,17 @@ export const updateCart = async (userId, products) => {
             const createdAt  = new Date() ;
 
             try{
-                await setDoc(userDocRef , {displayName , email, createdAt , cart})
+
+               await setDoc(userDocRef , {displayName , email, createdAt , cart})
+             
+              console.log("User document created successfully");
             }catch(error){
                     console.log("error while creating a user ", error.message)
             }
+
+            
+
+
         }
         return userDocRef;
 

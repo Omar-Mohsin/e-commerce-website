@@ -95,7 +95,7 @@ function Cart(): JSX.Element {
                 <input
                   type="text"
                   value={
-                    carts.filter((item: any) => item.id === product.id).length
+                    carts.filter((item: Product) => item.id === product.id).length
                   }
                 />
                 <button className="Counter" onClick={() => plusOnClick(product)}>

@@ -7,7 +7,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { SelectAllCart } from '../feature/cart/cartsSlice'
-import { SelectStatus , signOut } from '../feature/auth/authSlice'
+import { signOut } from '../feature/auth/authSlice'
+import { SelectUser } from '../feature/auth/authSlice'
 
 
 function NavBar()  : JSX.Element{
@@ -17,7 +18,7 @@ function NavBar()  : JSX.Element{
     dispatch(signOut(null))
   }
   const cart  = useSelector(SelectAllCart);
-  const status = useSelector(SelectStatus);
+  const user = useSelector(SelectUser);
 
   return (
     <>
@@ -34,7 +35,7 @@ function NavBar()  : JSX.Element{
 
     
    
-      {status ? (
+      {user ? (
          <Sign>
          <Link to='/profile' style={{ textDecoration: 'none', color: 'black', }}>profile</Link>
 
