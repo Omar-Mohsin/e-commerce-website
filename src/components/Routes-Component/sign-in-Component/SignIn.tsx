@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../../utils/firebase/firebase.utils';
 import { setUser   } from '../../../feature/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 function SignIn() {
 

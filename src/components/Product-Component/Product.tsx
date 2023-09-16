@@ -1,34 +1,28 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
-import { Button } from '@mui/material';
 import { addItem, SelectAllCart } from '../../feature/cart/cartsSlice';
-import { SelectAllProducts , fetchProducts } from '../../feature/product/productSlice';
-import { ShoppingCartRounded } from '@mui/icons-material';
+import { SelectAllProducts, fetchProducts } from '../../feature/product/productSlice';
 import { Link } from 'react-router-dom';
 import { AnyAction } from '@reduxjs/toolkit';
-
 import { ThunkDispatch } from 'redux-thunk';
 
-
-
 interface Product {
-  id : number , 
-  image : string,
-  title :  string, 
-  price :  number 
+  id: number;
+  image: string;
+  title: string;
+  price: number;
 }
 
 function Product(): JSX.Element {
   const dispatch: ThunkDispatch<RTCStatsType, unknown, AnyAction> = useDispatch();
   const Products = useSelector(SelectAllProducts);
   const cart = useSelector(SelectAllCart);
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-
-  console.log(Products);
   const addOnCart = (product: Product) => {
     dispatch(addItem(product));
   };
@@ -48,11 +42,9 @@ function Product(): JSX.Element {
                 {cart.filter((item: Product) => item.id === product.id).length}
               </CartItemCount>
             )}
-            <ProductTile>{product.title}</ProductTile>
+            <ProductTitle>{product.title}</ProductTitle>
             <Price>${product.price}</Price>
-            <AddToCartButton onClick={() => addOnCart(product)}>
-              ADD TO CART
-            </AddToCartButton>
+            <AddToCartButton onClick={() => addOnCart(product)}>ADD TO CART</AddToCartButton>
           </CardItem>
         ))
       ) : (
@@ -85,18 +77,12 @@ const CardItem = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 25px;
-  transition: transform 0.5s;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  h5 {
-    font-size: 1.4rem;
-    margin: 10px 0;
-    color: #053b50;
   }
 `;
 
@@ -121,16 +107,14 @@ const ImageContainer = styled.div`
 `;
 
 const CartItemCount = styled.p`
-  font-size: 1.2rem;
-  text-align: center;
-  margin: 10px;
-  padding: 5px 10px;
-  background-color: #64ccc5;
-  color: white;
   position: absolute;
   top: 5px;
   right: 5px;
+  background-color: #64ccc5;
+  color: white;
   border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 1.2rem;
 `;
 
 const Price = styled.p`
@@ -139,7 +123,7 @@ const Price = styled.p`
   margin: 0;
   padding: 8px 16px;
   color: #ff5733;
-  border-radius: 25px;
+  border-radius: 10px;
 `;
 
 const AddToCartButton = styled.button`
@@ -150,22 +134,16 @@ const AddToCartButton = styled.button`
   border: none;
   border-radius: 5px;
   font-size: 1.2rem;
-  justify-content : center;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: #fff;
-    color: #000;
+    background-color: #64ccc5;
   }
-
-`
-const ProductTile = styled.p`
-
-  font-weight : bold;
-
-  
-
-
 `;
 
-;
+const ProductTitle = styled.p`
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin: 10px 0;
+  color: #053b50;
+`;
