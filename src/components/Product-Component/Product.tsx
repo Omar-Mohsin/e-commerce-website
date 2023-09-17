@@ -32,11 +32,10 @@ function Product(): JSX.Element {
       {Products ? (
         Products.map((product: Product) => (
           <CardItem key={product.id} data-test-id="product">
-            <Link to={`/Detile/${product?.id}`}>
               <ImageContainer>
                 <img src={product.image} alt={product.title} />
               </ImageContainer>
-            </Link>
+           
             {cart.filter((item: Product) => item.id === product.id).length > 0 && (
               <CartItemCount>
                 {cart.filter((item: Product) => item.id === product.id).length}
@@ -44,7 +43,14 @@ function Product(): JSX.Element {
             )}
             <ProductTitle>{product.title}</ProductTitle>
             <Price>${product.price}</Price>
+            <Buttons>
             <AddToCartButton onClick={() => addOnCart(product)}>ADD TO CART</AddToCartButton>
+
+            <Link to={`/Detile/${product?.id}`} style={{ textDecoration: 'none', color: 'black'}}>
+            <MoreInfo >MORE INFO</MoreInfo>
+
+            </Link>
+            </Buttons>
           </CardItem>
         ))
       ) : (
@@ -68,6 +74,7 @@ const Container = styled.div`
 `;
 
 const CardItem = styled.div`
+
   position: relative;
   width: calc(33.33% - 20px);
   background-color: #ffffff;
@@ -77,7 +84,7 @@ const CardItem = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 20px;
   transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
@@ -132,14 +139,37 @@ const AddToCartButton = styled.button`
   color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 1.2rem;
   transition: background-color 0.2s ease-in-out;
+  margin-right : 10px;
 
   &:hover {
-    background-color: #64ccc5;
+    color : black;
+    background-color: white;
   }
 `;
+const Buttons  = styled.div`
+  margin-top : 20px;
+  display : flex; 
+`
+const MoreInfo = styled.button`
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  transition: background-color 0.2s ease-in-out;
+  margin-right : 10px;
+
+  &:hover {
+    color : white;
+    background-color: #64ccc5;
+  }
+
+`
 
 const ProductTitle = styled.p`
   font-weight: bold;
