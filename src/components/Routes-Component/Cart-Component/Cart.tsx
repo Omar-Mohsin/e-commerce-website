@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem } from '../../../feature/cart/cartsSlice';
 import { SelectAllCart } from '../../../feature/cart/cartsSlice';
 import './cart.scss';
-import { SelectId } from '../../../feature/auth/authSlice';
+import { SelectId, SelectUser} from '../../../feature/auth/authSlice';
 import '../../animation.scss';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -20,6 +20,7 @@ function Cart(): JSX.Element {
   }
 
   const carts = useSelector(SelectAllCart);
+  const user  = useSelector(SelectUser);
   const userId = useSelector(SelectId);
   console.log(userId)
   const dispatch = useDispatch();
@@ -145,14 +146,24 @@ function Cart(): JSX.Element {
       </div>
 
      
-      
-        <button className="checkout" onClick={onClickHandler}>Checkout</button>
+      {user ? (
+        <Link to ='/orders'>
+         <button className="checkout" onClick={onClickHandler}>Checkout</button>
+         </Link>
+        ) :
+        <Link to ='/signIn'>
+        <button className="checkout">Checkout</button>
+        </Link>
+            
+        
+        }
+       
    
     </div>
     ) : <CartEmpty> 
-           <p>
+           <h4>
          carts is empty
-         </p>
+         </h4>
          </CartEmpty>
     
     }
@@ -162,19 +173,21 @@ function Cart(): JSX.Element {
 
 export default Cart;
 
-
-
-
 const CartEmpty  =  styled.div `
 display : flex;
 margin-top : 200px;
 justify-content : center ; 
 align-items : center
 
-p {
-  font-size : 40px;
+h4 {
+  font-size : 100px;
   font-family: 'Dancing Script', cursive;
 
 }
-
 `
+const   SignIn = styled.h4`
+
+  text-align: center;
+  margin-top: 50px;
+`;
+ 

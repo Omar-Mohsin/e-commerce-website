@@ -5,7 +5,6 @@ import { SelectId } from '../../feature/auth/authSlice';
 import { getUserCart } from '../../utils/firebase/firebase.utils';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns'; 
-
 function Order() {
   const userId = useSelector(SelectId);
   const [cart, setCart] = useState([]);
@@ -25,47 +24,79 @@ function Order() {
     }
   }, [userId]);
 
+  const calculateOrderSummary = (order) => {
+    const subtotal = order.products.reduce((total, product) => {
+      return total + product.price;
+    }, 0);
+
+    const tax = subtotal * 0.05;
+    const grandTotal = subtotal + tax;
+
+    return {
+      subtotal: subtotal.toFixed(2),
+      tax: tax.toFixed(2),
+      grandTotal: grandTotal.toFixed(2),
+    };
+  };
+
   return (
     <Container>
       <Header>
         <h1>Your Order History</h1>
       </Header>
-      {cart.map((item, index) => (
-        <OrderItem key={index}>
-          <OrderTimestamp>
-            {format(new Date(item.timestamp.seconds * 1000), 'MMMM dd, yyyy HH:mm:ss')}
-          </OrderTimestamp>
-          <CartItems>
-            {item.products.reduce((uniqueProducts, product) => {
-              const existingProduct = uniqueProducts.find(p => p.id === product.id);
+      {cart.map((item, index) => {
+        const orderSummary = calculateOrderSummary(item);
+        return (
+          <OrderItem key={index}>
+            <OrderTimestamp>
+              {format(new Date(item.timestamp.seconds * 1000), 'MMMM dd, yyyy HH:mm:ss')}
+            </OrderTimestamp>
+            <CartItems>
+              {item.products.reduce((uniqueProducts, product) => {
+                const existingProduct = uniqueProducts.find(p => p.id === product.id);
 
-              if (!existingProduct) {
-                uniqueProducts.push({ ...product, quantity: 1 });
-              } else {
-                existingProduct.quantity += 1;
-              }
+                if (!existingProduct) {
+                  uniqueProducts.push({ ...product, quantity: 1 });
+                } else {
+                  existingProduct.quantity += 1;
+                }
 
-              return uniqueProducts;
-            }, []).map((uniqueProduct, productIndex) => (
-              <StyledCartItem key={productIndex}>
-                <ItemImage src={uniqueProduct.image} alt={uniqueProduct.title} />
-                <ItemDetails>
-                  <ItemTitle>{uniqueProduct.title}</ItemTitle>
-                  <ItemDescription>{uniqueProduct.description}</ItemDescription>
-                  <ItemPrice>${uniqueProduct.price}</ItemPrice>
-                  <ItemQuantity>Quantity: {uniqueProduct.quantity}</ItemQuantity>
-                </ItemDetails>
-              </StyledCartItem>
-            ))}
-          </CartItems>
-        </OrderItem>
-      ))}
+                return uniqueProducts;
+              }, []).map((uniqueProduct, productIndex) => (
+                <StyledCartItem key={productIndex}>
+                  <ItemImage src={uniqueProduct.image} alt={uniqueProduct.title} />
+                  <ItemDetails>
+                    <ItemTitle>{uniqueProduct.title}</ItemTitle>
+                    <ItemDescription>{uniqueProduct.description}</ItemDescription>
+                    <ItemPrice>${uniqueProduct.price}</ItemPrice>
+                    <ItemQuantity>Quantity: {uniqueProduct.quantity}</ItemQuantity>
+                  </ItemDetails>
+                </StyledCartItem>
+              ))}
+            </CartItems>
+            <OrderSummary>
+              <SummaryItem>
+                <SummaryLabel>Subtotal:</SummaryLabel>
+                <SummaryValue>${orderSummary.subtotal}</SummaryValue>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryLabel>Tax (5%):</SummaryLabel>
+                <SummaryValue>${orderSummary.tax}</SummaryValue>
+              </SummaryItem>
+              <SummaryItem>
+                <SummaryLabel>Grand Total:</SummaryLabel>
+                <SummaryValue>${orderSummary.grandTotal}</SummaryValue>
+              </SummaryItem>
+            </OrderSummary>
+          </OrderItem>
+        );
+      })}
     </Container>
   );
 }
-
 export default Order;
 
+// Styled components
 const Container = styled.div`
   margin: 50px auto;
   text-align: center;
@@ -137,7 +168,6 @@ const ItemPrice = styled.p`
 const Header = styled.div`
   margin-top: 30px;
   background-color: #f7f7f7;
-
 `;
 
 const ItemQuantity = styled.p`
@@ -148,3 +178,32 @@ const ItemQuantity = styled.p`
 `;
 
 // Add more styling as needed
+
+// Styled components for the summary section
+const OrderSummary = styled.div`
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 20px;
+  text-align: left;
+`;
+
+const SummaryItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+const SummaryLabel = styled.p`
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+`;
+
+const SummaryValue = styled.p`
+  color: #444;
+  font-size: 16px;
+  margin: 0;
+`;

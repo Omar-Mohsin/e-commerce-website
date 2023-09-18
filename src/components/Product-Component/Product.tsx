@@ -41,7 +41,7 @@ function Product(): JSX.Element {
                 {cart.filter((item: Product) => item.id === product.id).length}
               </CartItemCount>
             )}
-            <ProductTitle>{product.title}</ProductTitle>
+            <ProductTitle  >{product.title}</ProductTitle>
             <Price>${product.price}</Price>
             <Buttons>
             <AddToCartButton onClick={() => addOnCart(product)}>ADD TO CART</AddToCartButton>
@@ -71,6 +71,15 @@ const Container = styled.div`
   max-width: 100%;
   padding: 20px;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const CardItem = styled.div`
@@ -90,6 +99,14 @@ const CardItem = styled.div`
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    width: calc(50% - 20px);
+  }
+
+  @media (max-width: 576px) {
+    width: 100%;
   }
 `;
 
@@ -172,6 +189,15 @@ const MoreInfo = styled.button`
 `
 
 const ProductTitle = styled.p`
+
+
+
+white-space: nowrap;          
+  overflow: hidden;           
+  text-overflow: ellipsis;     
+  max-width: 100%; 
+
+
   font-weight: bold;
   font-size: 1.4rem;
   margin: 10px 0;

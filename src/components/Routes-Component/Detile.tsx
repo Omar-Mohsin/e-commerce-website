@@ -140,7 +140,7 @@ const AddToCartButton = styled.button`
   background-color: #176B87; /* Orange color for button */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 12px 24px;
   font-size: 20px;
   cursor: pointer;
