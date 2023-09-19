@@ -165,10 +165,23 @@ const AddToCartButton = styled.button`
     color : black;
     background-color: white;
   }
+  @media (max-width: 768px) {
+    font-size  :15px;
+  }
+
+  @media (max-width: 576px) {
+    font-size  :20px;
+
+  }
 `;
 const Buttons  = styled.div`
   margin-top : 20px;
   display : flex; 
+
+
+ 
+
+
 `
 const MoreInfo = styled.button`
   cursor: pointer;
@@ -186,6 +199,14 @@ const MoreInfo = styled.button`
     background-color: #64ccc5;
   }
 
+  @media (max-width: 768px) {
+    font-size  :15px;
+  }
+
+  @media (max-width: 576px) {
+    font-size  :20px;
+
+  }
 `
 
 const ProductTitle = styled.p`

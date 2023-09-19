@@ -86,25 +86,36 @@ function Detail()  : JSX.Element {
 
 export default Detail;
 const Container = styled.div`
+margin-top :50px;
   display: flex;
-  align-items: center;
-  margin-top: 50px;
+
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
 `;
 
 const ImageContainer = styled.div`
-  max-width: 70%;
-  height : auto;
+   max-width: 100%;
+  height: auto;
   text-align: center;
-  align-items:center;
-  justify-content :center;
-  padding-left : 100px;
-  margin-left : 20px;
-  margin-top : 25px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 15px;
+  padding-left :50px;
   img{
-    width : 500px;
-    height: 500px;
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
   }
  
+  @media (min-width: 768px) {
+    max-width: 70%;
+    padding-left: 100px;
+  }
 `;
 
 const Content = styled.div`
@@ -114,7 +125,7 @@ margin-right  : 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 60px;
   color: #333;
 `;
 
