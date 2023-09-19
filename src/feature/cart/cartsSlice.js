@@ -29,7 +29,7 @@ const cartSlice = createSlice({
     },
 })
 
-export const {addItem,removeItem, decrement, increment } = cartSlice.actions;
+export const {addItem,removeItem } = cartSlice.actions;
 
 
 export const SelectAllCart =(state)=>{
