@@ -1,44 +1,35 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react'
 import { styled } from 'styled-components';
-import { addItem, SelectAllCart } from '../../feature/cart/cartsSlice';
-import { SelectAllProducts, fetchProducts } from '../../feature/product/productSlice';
+import { SelectAllCart } from '../../feature/cart/cartsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../../feature/cart/cartsSlice';
 import { Link } from 'react-router-dom';
-import { AnyAction } from '@reduxjs/toolkit';
-import { ThunkDispatch } from 'redux-thunk';
 
-interface Product {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-}
+interface Products {
+    id: number;
+    image: string;
+    title: string;
+    price: number;
+  }
+  
 
-function Product(): JSX.Element {
-  const dispatch: ThunkDispatch<RTCStatsType, unknown, AnyAction> = useDispatch();
-  const Products = useSelector(SelectAllProducts);
-  const cart = useSelector(SelectAllCart);
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
-  const addOnCart = (product: Product) => {
-    dispatch(addItem(product));
-  };
+function Product({product} : any) {
+    const dispatch = useDispatch();
+    const cart = useSelector(SelectAllCart)
+    const addOnCart = (product: Products) => {
+        dispatch(addItem(product));
+      };
 
   return (
-    <Container className="fade-in">
-      {Products ? (
-        Products.map((product: Product) => (
-          <CardItem key={product.id} data-test-id="product">
+
+    <CardItem key={product.id} data-test-id="product">
               <ImageContainer>
                 <img src={product.image} alt={product.title} />
               </ImageContainer>
            
-            {cart.filter((item: Product) => item.id === product.id).length > 0 && (
+            {cart.filter((item: Products) => item.id === product.id).length > 0 && (
               <CartItemCount>
-                {cart.filter((item: Product) => item.id === product.id).length}
+                {cart.filter((item: Products) => item.id === product.id).length}
               </CartItemCount>
             )}
             <ProductTitle  >{product.title}</ProductTitle>
@@ -52,35 +43,13 @@ function Product(): JSX.Element {
             </Link>
             </Buttons>
           </CardItem>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
-    </Container>
-  );
+  )
 }
 
-export default Product;
+export default Product
 
-const Container = styled.div`
-  background-color: #f7f7f7;
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 100%;
-  padding: 20px;
-  justify-content: center;
 
-  @media (max-width: 768px) {
-    gap: 10px;
-  }
 
-  @media (max-width: 576px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
 
 const CardItem = styled.div`
 
