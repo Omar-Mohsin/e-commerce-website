@@ -23,16 +23,16 @@ export default function Profile() {
       </ProfileHeader>
       <Navigation>
       <Link to="/">
-          <StyledButton>Store</StyledButton>
+          <Button>Store</Button>
         </Link>
         <Link to="/cart">
-          <StyledButton>My Cart</StyledButton>
+          <Button>My Cart</Button>
         </Link>
         <Link to="/orders">
-          <StyledButton>My Orders</StyledButton>
+          <Button>My Orders</Button>
         </Link>
         <Link to ='/'>
-        <StyledButton onClick={OnClickHandler}>Sign Out</StyledButton>
+        <LogOutButton onClick={OnClickHandler}>Logout</LogOutButton>
         </Link>
       </Navigation>
     </Container>
@@ -87,12 +87,12 @@ const Navigation = styled.div`
   align-items: center;
 `;
 
-const StyledButton = styled.button`
+const Button = styled.button`
 width : 200px;
   background-color: #0077b6;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 10px 20px;
   font-size: 16px;
   margin: 10px;
@@ -105,3 +105,21 @@ width : 200px;
     color : black;
   }
 `;
+const LogOutButton = styled.button`
+width : 200px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px;
+  margin-top : 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #fff;
+    color : black;
+  }
+  `
