@@ -133,7 +133,7 @@ const AddToCartButton = styled.button`
   }
 
   @media (max-width: 576px) {
-    font-size: 20px;
+    font-size: 10px;
   }
 `;
 const Buttons = styled.div`
