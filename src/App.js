@@ -4,7 +4,7 @@ import Navbar from './components/NavBar'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Cart from "./components/Routes-Component/Cart-Component/Cart";
 import Detile from "./components/Routes-Component/HomePage/Detail/Detile";
-import Order from './components/Routes-Component/Order';
+import Order from './components/Routes-Component/OrdersComponents/Order';
 import SignIn from './components/Routes-Component/Validation-Component/SignIn';
 import Profile from './components/Routes-Component/Validation-Component/Profile';
 import { SelectUser } from './feature/auth/authSlice';
