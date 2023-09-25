@@ -1,58 +1,56 @@
-import React from 'react'
-import { styled } from 'styled-components';
-import { SelectAllCart } from '../../feature/cart/cartsSlice';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../../feature/cart/cartsSlice';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { styled } from "styled-components";
+import { SelectAllCart } from "../../../../feature/cart/cartsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../../../../feature/cart/cartsSlice";
+import { Link } from "react-router-dom";
 
 interface Products {
-    id: number;
-    image: string;
-    title: string;
-    price: number;
-  }
-  
-
-function Product({product} : any) {
-    const dispatch = useDispatch();
-    const cart = useSelector(SelectAllCart)
-    const addOnCart = (product: Products) => {
-        dispatch(addItem(product));
-      };
-
-  return (
-
-    <CardItem key={product.id} data-test-id="product">
-              <ImageContainer>
-                <img src={product.image} alt={product.title} />
-              </ImageContainer>
-           
-            {cart.filter((item: Products) => item.id === product.id).length > 0 && (
-              <CartItemCount>
-                {cart.filter((item: Products) => item.id === product.id).length}
-              </CartItemCount>
-            )}
-            <ProductTitle  >{product.title}</ProductTitle>
-            <Price>${product.price}</Price>
-            <Buttons>
-            <AddToCartButton onClick={() => addOnCart(product)}>ADD TO CART</AddToCartButton>
-
-            <Link to={`/Detile/${product?.id}`} style={{ textDecoration: 'none', color: 'black'}}>
-            <MoreInfo >MORE INFO</MoreInfo>
-
-            </Link>
-            </Buttons>
-          </CardItem>
-  )
+  id: number;
+  image: string;
+  title: string;
+  price: number;
 }
 
-export default Product
+function Product({ product }: any) {
+  const dispatch = useDispatch();
+  const cart = useSelector(SelectAllCart);
+  const addOnCart = (product: Products) => {
+    dispatch(addItem(product));
+  };
 
+  return (
+    <CardItem key={product.id} data-test-id="product">
+      <ImageContainer>
+        <img src={product.image} alt={product.title} />
+      </ImageContainer>
 
+      {cart.filter((item: Products) => item.id === product.id).length > 0 && (
+        <CartItemCount>
+          {cart.filter((item: Products) => item.id === product.id).length}
+        </CartItemCount>
+      )}
+      <ProductTitle>{product.title}</ProductTitle>
+      <Price>${product.price}</Price>
+      <Buttons>
+        <AddToCartButton onClick={() => addOnCart(product)}>
+          ADD TO CART
+        </AddToCartButton>
 
+        <Link
+          to={`/Detile/${product?.id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <MoreInfo>MORE INFO</MoreInfo>
+        </Link>
+      </Buttons>
+    </CardItem>
+  );
+}
+
+export default Product;
 
 const CardItem = styled.div`
-
   position: relative;
   width: calc(33.33% - 20px);
   background-color: #ffffff;
@@ -128,30 +126,24 @@ const AddToCartButton = styled.button`
   border-radius: 20px;
   font-size: 1.2rem;
   transition: background-color 0.2s ease-in-out;
-  margin-right : 10px;
+  margin-right: 10px;
 
   &:hover {
-    color : black;
+    color: black;
     background-color: white;
   }
   @media (max-width: 768px) {
-    font-size  :15px;
+    font-size: 15px;
   }
 
   @media (max-width: 576px) {
-    font-size  :20px;
-
+    font-size: 20px;
   }
 `;
-const Buttons  = styled.div`
-  margin-top : 20px;
-  display : flex; 
-
-
- 
-
-
-`
+const Buttons = styled.div`
+  margin-top: 20px;
+  display: flex;
+`;
 const MoreInfo = styled.button`
   cursor: pointer;
   background-color: white;
@@ -161,32 +153,27 @@ const MoreInfo = styled.button`
   border-radius: 20px;
   font-size: 1.2rem;
   transition: background-color 0.2s ease-in-out;
-  margin-right : 10px;
+  margin-right: 10px;
 
   &:hover {
-    color : white;
+    color: white;
     background-color: #64ccc5;
   }
 
   @media (max-width: 768px) {
-    font-size  :15px;
+    font-size: 15px;
   }
 
   @media (max-width: 576px) {
-    font-size  :20px;
-
+    font-size: 20px;
   }
-`
+`;
 
 const ProductTitle = styled.p`
-
-
-
-white-space: nowrap;          
-  overflow: hidden;           
-  text-overflow: ellipsis;     
-  max-width: 100%; 
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 
   font-weight: bold;
   font-size: 1.4rem;

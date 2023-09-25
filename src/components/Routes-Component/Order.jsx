@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { SelectAllCart } from '../../feature/cart/cartsSlice';
-import { SelectId } from '../../feature/auth/authSlice';
-import { getUserCart } from '../../utils/firebase/firebase.utils';
-import { useSelector } from 'react-redux';
-import { format } from 'date-fns'; 
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { SelectAllCart } from "../../feature/cart/cartsSlice";
+import { SelectId } from "../../feature/auth/authSlice";
+import { getUserCart } from "../../utils/firebase/firebase.utils";
+import { useSelector } from "react-redux";
+import { format } from "date-fns";
 function Order() {
   const userId = useSelector(SelectId);
   const [cart, setCart] = useState([]);
@@ -15,7 +15,7 @@ function Order() {
         const userCart = await getUserCart(userId);
         setCart(userCart);
       } catch (error) {
-        console.error('Error fetching user cart:', error);
+        console.error("Error fetching user cart:", error);
       }
     };
 
@@ -49,30 +49,44 @@ function Order() {
         return (
           <OrderItem key={index}>
             <OrderTimestamp>
-              {format(new Date(item.timestamp.seconds * 1000), 'MMMM dd, yyyy HH:mm:ss')}
+              {format(
+                new Date(item.timestamp.seconds * 1000),
+                "MMMM dd, yyyy HH:mm:ss"
+              )}
             </OrderTimestamp>
             <CartItems>
-              {item.products.reduce((uniqueProducts, product) => {
-                const existingProduct = uniqueProducts.find(p => p.id === product.id);
+              {item.products
+                .reduce((uniqueProducts, product) => {
+                  const existingProduct = uniqueProducts.find(
+                    (p) => p.id === product.id
+                  );
 
-                if (!existingProduct) {
-                  uniqueProducts.push({ ...product, quantity: 1 });
-                } else {
-                  existingProduct.quantity += 1;
-                }
+                  if (!existingProduct) {
+                    uniqueProducts.push({ ...product, quantity: 1 });
+                  } else {
+                    existingProduct.quantity += 1;
+                  }
 
-                return uniqueProducts;
-              }, []).map((uniqueProduct, productIndex) => (
-                <StyledCartItem key={productIndex}>
-                  <ItemImage src={uniqueProduct.image} alt={uniqueProduct.title} />
-                  <ItemDetails>
-                    <ItemTitle>{uniqueProduct.title}</ItemTitle>
-                    <ItemDescription>{uniqueProduct.description}</ItemDescription>
-                    <ItemPrice>${uniqueProduct.price}</ItemPrice>
-                    <ItemQuantity>Quantity: {uniqueProduct.quantity}</ItemQuantity>
-                  </ItemDetails>
-                </StyledCartItem>
-              ))}
+                  return uniqueProducts;
+                }, [])
+                .map((uniqueProduct, productIndex) => (
+                  <StyledCartItem key={productIndex}>
+                    <ItemImage
+                      src={uniqueProduct.image}
+                      alt={uniqueProduct.title}
+                    />
+                    <ItemDetails>
+                      <ItemTitle>{uniqueProduct.title}</ItemTitle>
+                      <ItemDescription>
+                        {uniqueProduct.description}
+                      </ItemDescription>
+                      <ItemPrice>${uniqueProduct.price}</ItemPrice>
+                      <ItemQuantity>
+                        Quantity: {uniqueProduct.quantity}
+                      </ItemQuantity>
+                    </ItemDetails>
+                  </StyledCartItem>
+                ))}
             </CartItems>
             <OrderSummary>
               <SummaryItem>
