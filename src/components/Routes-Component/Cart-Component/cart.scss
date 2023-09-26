@@ -292,7 +292,7 @@ label {
     color: #fff;
     font-family: $font-bold;
     font-size: 12px;
-    border-radius: 3px;
+    border-radius: 15px;
   }
 
   .remove-product:hover {
@@ -336,7 +336,18 @@ label {
   background-color: #6b6;
   color: #fff;
   font-size: 25px;
-  border-radius: 3px;
+  border-radius: 15px;
+}
+
+.signIn {
+  float: right;
+  border: 0;
+  margin-top: 20px;
+  padding: 6px 25px;
+  background-color: red;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 15px;
 }
 
 .checkout:hover {
@@ -361,6 +372,7 @@ label {
     width: auto;
 
     img {
+
       margin: 0 0 10px 10px;
     }
   }

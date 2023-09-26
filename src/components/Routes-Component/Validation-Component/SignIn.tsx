@@ -1,48 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
+import { bindActionCreators, Dispatch } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
 } from "../../../utils/firebase/firebase.utils";
 import { setUser } from "../../../feature/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-function SignIn() {
-  const dispatch = useDispatch();
-  const logGoogleUser = async () => {
+
+interface SignInProps {
+  setUser: (user: any) => void; // Adjust the type of user according to your needs
+}
+
+class SignIn extends Component<SignInProps> {
+  logGoogleUser = async () => {
     try {
       const { user } = await signInWithGooglePopup();
       createUserDocumentFromAuth(user);
 
       console.log(user);
-      dispatch(setUser(user));
+      this.props.setUser(user);
     } catch (error) {
       console.log(error);
     }
   };
 
-  return (
-    <Container>
-      <Card>
-        <Title>
-          <span>Welcome to Diamond Store</span>
-        </Title>
+  render() {
+    return (
+      <Container>
+        <Card>
+          <Title>
+            <span>Welcome to Diamond Store</span>
+          </Title>
 
-        <p>Click the button to sign in</p>
+          <p>Click the button to sign in</p>
 
-        <Link to="/profile" style={{ textDecoration: "none" }}>
-          {" "}
-          <GoogleSignInButton onClick={logGoogleUser}>
-            Sign in with Google
-          </GoogleSignInButton>
-        </Link>
-      </Card>
-    </Container>
-  );
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            {" "}
+            <GoogleSignInButton onClick={this.logGoogleUser}>
+              Sign in with Google
+            </GoogleSignInButton>
+          </Link>
+        </Card>
+      </Container>
+    );
+  }
 }
-
-export default SignIn;
 
 const Container = styled.div`
   display: flex;
@@ -74,7 +79,6 @@ const Card = styled.div`
 
 const Title = styled.div`
   margin-top: -89px;
-
   padding-bottom: 100px;
   display: flex;
 
@@ -82,12 +86,6 @@ const Title = styled.div`
     font-size: 35px;
     font-family: "Dancing Script", cursive;
   }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 const GoogleSignInButton = styled.button`
@@ -109,3 +107,14 @@ const GoogleSignInButton = styled.button`
     color: black;
   }
 `;
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return bindActionCreators(
+    {
+      setUser,
+    },
+    dispatch
+  );
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);

@@ -1,6 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addItem, removeItem } from "../../../feature/cart/cartsSlice";
+import { useSelector} from "react-redux";
 import { SelectAllCart } from "../../../feature/cart/cartsSlice";
 import "./cart.scss";
 import { SelectId, SelectUser } from "../../../feature/auth/authSlice";
@@ -53,11 +52,9 @@ function Cart(): JSX.Element {
       {carts.length > 0 ? (
         <div className="product">
           <CartPageTitle />
-
           {filteredCarts.map((product: Product) => {
             return <CartProduct product={product} total={totalPrice} />;
           })}
-          {/* ---------------------Component---------------------------- */}
           <div className="totals">
             <div className="totals-item">
               <label>Subtotal</label>
@@ -93,12 +90,11 @@ function Cart(): JSX.Element {
             </Link>
           ) : (
             <Link to="/signIn">
-              <button className="checkout">Checkout</button>
+              <button className="signIn">Sign in</button>
             </Link>
           )}
         </div>
       ) : (
-        //--------------------------------------------------------------
         <CartEmpty>
           <h4>carts is empty</h4>
         </CartEmpty>
@@ -117,8 +113,4 @@ const CartEmpty = styled.div`
     font-size: 100px;
     font-family: "Dancing Script", cursive;
   }
-`;
-const SignIn = styled.h4`
-  text-align: center;
-  margin-top: 50px;
 `;
