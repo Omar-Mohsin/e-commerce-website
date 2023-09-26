@@ -39,13 +39,14 @@ const Title = styled.h4`
 const Descirption = styled.p`
   font-size: 18px;
   color: #666;
+  margin-top : 50px;
   margin-bottom: 20px;
 `;
 
 const Price = styled.p`
   font-size: 24px;
   color: #ff5733; /* Teal color for price */
-  margin-bottom: 10px;
+  margin-top: 30px;
 `;
 
 const AddToCartButton = styled.button`
@@ -54,6 +55,7 @@ const AddToCartButton = styled.button`
   border: none;
   border-radius: 20px;
   padding: 12px 24px;
+  margin-top : 30px;
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;

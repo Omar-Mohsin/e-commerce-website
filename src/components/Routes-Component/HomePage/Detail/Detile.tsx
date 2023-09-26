@@ -92,6 +92,7 @@ const ImageContainer = styled.div`
   margin-top: 15px;
   padding-left: 50px;
   img {
+    margin-left : 40px;
     max-width: 100%;
     height: auto;
     max-height: 500px;
