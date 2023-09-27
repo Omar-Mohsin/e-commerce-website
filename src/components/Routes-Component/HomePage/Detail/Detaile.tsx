@@ -4,26 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import "../../../animation.scss";
 import Slider from "react-slick";
+import { Product, Setting } from "../../../Types/Types";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductDescription from "./ProductDescription";
 function Detail(): JSX.Element {
-  interface Product {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    price: number;
-  }
-  interface ISetting {
-    dots: boolean;
-    infinite: boolean;
-    speed: number;
-    slidesToShow: number;
-    slidesToScroll: number;
-  }
-
-  const settings: ISetting = {
+  const settings: Setting = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -33,10 +20,10 @@ function Detail(): JSX.Element {
 
   const { id }: any = useParams();
   const products = useSelector(SelectAllProducts);
-  const idNumber: number = parseInt(id, 10);
+  const productId: number = parseInt(id, 10);
 
   const matchedProduct = products.find(
-    (product: Product) => product.id === idNumber
+    (product: Product) => product.id === productId
   );
 
   return (
@@ -46,20 +33,18 @@ function Detail(): JSX.Element {
           <ImageContainer>
             <img src={matchedProduct.image} alt={matchedProduct.title} />
           </ImageContainer>
+          <img src={"https://placehold.co/600x400"}></img>
           <div>
-            <h3>2</h3>
+            <img src={"https://placehold.co/600x400"}></img>
           </div>
           <div>
-            <h3>3</h3>
+            <img src={"https://placehold.co/600x400"}></img>
           </div>
           <div>
-            <h3>4</h3>
+            <img src={"https://placehold.co/600x400"}></img>
           </div>
           <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
+            <img src={"https://placehold.co/600x400"}></img>
           </div>
         </Slider>
       </ImageContainer>
@@ -92,7 +77,7 @@ const ImageContainer = styled.div`
   margin-top: 15px;
   padding-left: 50px;
   img {
-    margin-left : 40px;
+    margin-left: 40px;
     max-width: 100%;
     height: auto;
     max-height: 500px;

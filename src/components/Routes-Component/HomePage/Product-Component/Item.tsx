@@ -4,31 +4,23 @@ import { SelectAllCart } from "../../../../feature/cart/cartsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../../../../feature/cart/cartsSlice";
 import { Link } from "react-router-dom";
+import { Product } from "../../../Types/Types";
 
-interface Products {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-}
-
-function Product({ product }: any) {
+function Item({ product }: any) {
   const dispatch = useDispatch();
   const cart = useSelector(SelectAllCart);
-  const addOnCart = (product: Products) => {
+  const addOnCart = (product: Product) => {
     dispatch(addItem(product));
   };
-
+  const cartItems = cart.filter((item: Product) => item.id === product.id);
   return (
     <CardItem key={product.id} data-test-id="product">
       <ImageContainer>
         <img src={product.image} alt={product.title} />
       </ImageContainer>
 
-      {cart.filter((item: Products) => item.id === product.id).length > 0 && (
-        <CartItemCount>
-          {cart.filter((item: Products) => item.id === product.id).length}
-        </CartItemCount>
+      {cartItems.length > 0 && (
+        <CartItemCount>{cartItems.length}</CartItemCount>
       )}
       <ProductTitle>{product.title}</ProductTitle>
       <Price>${product.price}</Price>
@@ -38,7 +30,7 @@ function Product({ product }: any) {
         </AddToCartButton>
 
         <Link
-          to={`/Detile/${product?.id}`}
+          to={`/Detaile/${product?.id}`}
           style={{ textDecoration: "none", color: "black" }}
         >
           <MoreInfo>MORE INFO</MoreInfo>
@@ -48,7 +40,7 @@ function Product({ product }: any) {
   );
 }
 
-export default Product;
+export default Item;
 
 const CardItem = styled.div`
   position: relative;

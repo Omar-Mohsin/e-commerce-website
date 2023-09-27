@@ -10,20 +10,20 @@ function Order() {
   const userId = useSelector(SelectId);
   const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    const fetchUserCart = async () => {
-      try {
-        const userCart = await getUserCart(userId);
-        setCart(userCart);
-      } catch (error) {
-        console.error("Error fetching user cart:", error);
-      }
-    };
 
+  const fetchUserCart = async () => {
+    try {
+      const userCart = await getUserCart(userId);
+      setCart(userCart);
+    } catch (error) {
+      console.error("Error fetching user cart:", error);
+    }
+  };
+  useEffect(() => {
     if (userId) {
       fetchUserCart();
     }
-  }, [userId]);
+  }, []);
 
   const calculateOrderSummary = (order) => {
     const subtotal = order.products.reduce((total, product) => {

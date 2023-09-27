@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../../feature/auth/authSlice";
-function NavigayionButtons() {
+function NavigationButtons() {
   const dispatch = useDispatch();
 
-  const OnClickHandler = () => {
+  const LogOutHandler = () => {
     dispatch(signOut(null));
   };
 
@@ -23,14 +23,14 @@ function NavigayionButtons() {
           <Button>My Orders</Button>
         </Link>
         <Link to="/">
-          <LogOutButton onClick={OnClickHandler}>Logout</LogOutButton>
+          <LogOutButton onClick={LogOutHandler}>Logout</LogOutButton>
         </Link>
       </Navigation>
     </div>
   );
 }
 
-export default NavigayionButtons;
+export default NavigationButtons;
 
 const Navigation = styled.div`
   display: flex;

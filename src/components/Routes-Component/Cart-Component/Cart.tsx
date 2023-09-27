@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { SelectAllCart } from "../../../feature/cart/cartsSlice";
 import "./cart.scss";
 import { SelectId, SelectUser } from "../../../feature/auth/authSlice";
@@ -9,50 +9,44 @@ import { styled } from "styled-components";
 import { updateCart } from "../../../utils/firebase/firebase.utils";
 import CartProduct from "./CartProduct";
 import CartPageTitle from "./CartPageTitle";
+import { Product } from "../../Types/Types";
 function Cart(): JSX.Element {
-  interface Product {
-    id: number;
-    title: string;
-    price: number;
-    image: string;
-    description: string;
-  }
 
-  const carts = useSelector(SelectAllCart);
+  const cart = useSelector(SelectAllCart);
   const user = useSelector(SelectUser);
   const userId = useSelector(SelectId);
   console.log(userId);
-  const filteredCarts = carts.filter(
-    (item: Product, index: number) => carts.indexOf(item) === index
+  const filteredCart = cart.filter(
+    (item: Product, index: number) => cart.indexOf(item) === index
   );
 
-  const onClickHandler = () => {
-    updateCart(userId, carts);
+  const checkoutHandler = () => {
+    updateCart(userId, cart);
   };
 
   const totalPrice = (product: Product) => {
-    const newArray = carts.filter((item: Product) => item.id === product.id);
+    const newArray = cart.filter((item: Product) => item.id === product.id);
     const ArrayLength = newArray.length;
     const total = ArrayLength * product.price;
     return total;
   };
 
   const subtotal = Math.round(
-    filteredCarts.reduce((acc: number, product: Product) => {
+    filteredCart.reduce((acc: number, product: Product) => {
       return acc + totalPrice(product);
     }, 0)
   );
 
-  const taxRate = 0.05; // 5% tax rate
+  const taxRate = 0.06;
   const tax = Math.round(subtotal * taxRate);
   const grandTotal = Math.round(subtotal + tax);
 
   return (
     <>
-      {carts.length > 0 ? (
+      {cart.length > 0 ? (
         <div className="product">
           <CartPageTitle />
-          {filteredCarts.map((product: Product) => {
+          {filteredCart.map((product: Product) => {
             return <CartProduct product={product} total={totalPrice} />;
           })}
           <div className="totals">
@@ -84,7 +78,7 @@ function Cart(): JSX.Element {
 
           {user ? (
             <Link to="/orders">
-              <button className="checkout" onClick={onClickHandler}>
+              <button className="checkout" onClick={checkoutHandler}>
                 Checkout
               </button>
             </Link>
@@ -96,7 +90,7 @@ function Cart(): JSX.Element {
         </div>
       ) : (
         <CartEmpty>
-          <h4>carts is empty</h4>
+          <h4>cart is empty</h4>
         </CartEmpty>
       )}
     </>

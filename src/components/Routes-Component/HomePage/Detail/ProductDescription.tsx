@@ -2,18 +2,12 @@ import React from "react";
 import { styled } from "styled-components";
 import { addItem } from "../../../../feature/cart/cartsSlice";
 import { useDispatch } from "react-redux";
+import { Product } from "../../../Types/Types";
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-}
 function ProductDescription({ matchedProduct }: any) {
   const dispatch = useDispatch();
 
-  const onAddHandler = (matchedProduct: Product) => {
+  const AddToCartHandler = (matchedProduct: Product) => {
     dispatch(addItem(matchedProduct));
   };
   return (
@@ -21,7 +15,7 @@ function ProductDescription({ matchedProduct }: any) {
       <Title>{matchedProduct.title}</Title>
       <Descirption>{matchedProduct.description}</Descirption>
       <Price>${matchedProduct.price}</Price>
-      <AddToCartButton onClick={() => onAddHandler(matchedProduct)}>
+      <AddToCartButton onClick={() => AddToCartHandler(matchedProduct)}>
         ADD TO CART
       </AddToCartButton>
     </>
@@ -39,7 +33,7 @@ const Title = styled.h4`
 const Descirption = styled.p`
   font-size: 18px;
   color: #666;
-  margin-top : 50px;
+  margin-top: 50px;
   margin-bottom: 20px;
 `;
 
@@ -55,7 +49,7 @@ const AddToCartButton = styled.button`
   border: none;
   border-radius: 20px;
   padding: 12px 24px;
-  margin-top : 30px;
+  margin-top: 30px;
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;

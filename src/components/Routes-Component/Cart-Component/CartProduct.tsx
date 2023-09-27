@@ -1,32 +1,21 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Product } from "../../Types/Types";
 import {
   SelectAllCart,
   removeItem,
   addItem,
 } from "../../../feature/cart/cartsSlice";
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  description: string;
-}
-
 function CartProduct({ product, total }: any) {
   const cart = useSelector(SelectAllCart);
   const dispatch = useDispatch();
 
-  const onRemoveClick = (productId: number) => {
+  const removeItemFromCart = (productId: number) => {
     dispatch(removeItem(productId));
   };
 
-  const minOnClick = (productId: number) => {
-    dispatch(removeItem(productId));
-  };
-
-  const plusOnClick = (product: Product) => {
+  const addItemToCart = (product: Product) => {
     dispatch(addItem(product));
   };
 
@@ -42,7 +31,10 @@ function CartProduct({ product, total }: any) {
         </div>
         <div className="product-price">{product.price}</div>
         <div className="product-quantity">
-          <button className="Counter" onClick={() => minOnClick(product.id)}>
+          <button
+            className="Counter"
+            onClick={() => removeItemFromCart(product.id)}
+          >
             -
           </button>
           <input
@@ -51,14 +43,14 @@ function CartProduct({ product, total }: any) {
               cart.filter((item: Product) => item.id === product.id).length
             }
           />
-          <button className="Counter" onClick={() => plusOnClick(product)}>
+          <button className="Counter" onClick={() => addItemToCart(product)}>
             +
           </button>
         </div>
         <div className="product-removal">
           <button
             className="remove-product"
-            onClick={() => onRemoveClick(product.id)}
+            onClick={() => removeItemFromCart(product.id)}
           >
             Remove
           </button>

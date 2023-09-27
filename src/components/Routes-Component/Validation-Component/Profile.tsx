@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { useSelector } from "react-redux";
 import { SelectUser } from "../../../feature/auth/authSlice";
-import NavigayionButtons from "./NavigayionButtons";
+import NavigayionButtons from "./NavigationButtons";
 export default function Profile() {
   const user = useSelector(SelectUser);
 

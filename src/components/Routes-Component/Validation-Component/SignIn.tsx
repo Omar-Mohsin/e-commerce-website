@@ -38,7 +38,7 @@ class SignIn extends Component<SignInProps> {
           <p>Click the button to sign in</p>
 
           <Link to="/profile" style={{ textDecoration: "none" }}>
-            {" "}
+        
             <GoogleSignInButton onClick={this.logGoogleUser}>
               Sign in with Google
             </GoogleSignInButton>
