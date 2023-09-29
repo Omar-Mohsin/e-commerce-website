@@ -7,7 +7,7 @@ const Products_URL = 'https://fakestoreapi.com/products';
 
 const initialState = {
   product: [],
-  loading: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
+  status: 'idle', //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null
 }
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
@@ -26,14 +26,14 @@ const productSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
-        state.loading = 'loading'
+        state.status = 'loading'
         state.error = null;
 
       }).addCase(fetchProducts.fulfilled, (state, action) => {
-        state.loading = 'succeeded';
+        state.status = 'succeeded';
         state.product = action.payload;
       }).addCase(fetchProducts.rejected, (state, action) => {
-        state.loading = 'failed';
+        state.status = 'failed';
         state.error = action.error.message;
       });
   }
