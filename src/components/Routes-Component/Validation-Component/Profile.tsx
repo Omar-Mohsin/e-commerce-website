@@ -12,7 +12,7 @@ export default function Profile() {
         <ProfileImage src="https://robohash.org/1?set=set2" />
         <ProfileInfo>
           <WelcomeMessage>
-            Welcome, <UserName>{user}</UserName>
+            Welcome, <UserName>{user.displayName}</UserName>
           </WelcomeMessage>
         </ProfileInfo>
       </ProfileHeader>

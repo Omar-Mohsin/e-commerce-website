@@ -68,7 +68,7 @@ function NavBar(): JSX.Element {
             <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
               <ShoppingCartIcon></ShoppingCartIcon>
             </Link>
-            <span>{cart.length}</span>
+            <span>{cart?.length}</span>
           </p>
         </LeftNav>
       </Wrap>

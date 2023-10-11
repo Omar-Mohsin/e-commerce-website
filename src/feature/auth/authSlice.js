@@ -10,7 +10,7 @@ reducers :{
 
     setUser: {
     reducer (state, action){
-        state.user = action.payload.displayName;
+        state.user = action.payload;
         state.id = action.payload.uid;
 
     }},

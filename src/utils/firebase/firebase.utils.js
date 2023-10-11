@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth, GoogleAuthProvider ,signInWithPopup , signInWithRedirect} from 'firebase/auth'
+import {getAuth, GoogleAuthProvider ,signInWithPopup } from 'firebase/auth'
 import {getFirestore , doc  , getDoc , setDoc , updateDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -95,12 +95,8 @@ export const updateCart = async (userId, products) => {
                     console.log("error while creating a user ", error.message)
             }
 
-            
-
-
         }
         return userDocRef;
 
  }
 export const signInWithGooglePopup = ()=> signInWithPopup(auth , provider);
-export const signInWithGoogleRedirect = ()=> signInWithRedirect(auth , provider);

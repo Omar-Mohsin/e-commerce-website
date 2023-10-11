@@ -19,7 +19,7 @@ function Item({ product }: any) {
         <img src={product.image} alt={product.title} />
       </ImageContainer>
 
-      {cartItems.length > 0 && (
+      {cartItems?.length > 0 && (
         <CartItemCount>{cartItems.length}</CartItemCount>
       )}
       <ProductTitle>{product.title}</ProductTitle>

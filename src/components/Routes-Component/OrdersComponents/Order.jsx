@@ -10,7 +10,6 @@ function Order() {
   const userId = useSelector(SelectId);
   const [cart, setCart] = useState([]);
 
-
   const fetchUserCart = async () => {
     try {
       const userCart = await getUserCart(userId);
@@ -45,7 +44,7 @@ function Order() {
       <Header>
         <h1>Your Order History</h1>
       </Header>
-      {cart.map((item, index) => {
+      {cart?.map((item, index) => {
         const orderSummary = calculateOrderSummary(item);
         return (
           <OrderItem key={index}>

@@ -11,7 +11,6 @@ import CartProduct from "./CartProduct";
 import CartPageTitle from "./CartPageTitle";
 import { Product } from "../../Types/Types";
 function Cart(): JSX.Element {
-
   const cart = useSelector(SelectAllCart);
   const user = useSelector(SelectUser);
   const userId = useSelector(SelectId);
@@ -46,7 +45,7 @@ function Cart(): JSX.Element {
       {cart.length > 0 ? (
         <div className="product">
           <CartPageTitle />
-          {filteredCart.map((product: Product) => {
+          {filteredCart?.map((product: Product) => {
             return <CartProduct product={product} total={totalPrice} />;
           })}
           <div className="totals">

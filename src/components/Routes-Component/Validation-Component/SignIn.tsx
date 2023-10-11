@@ -19,8 +19,6 @@ class SignIn extends Component<SignInProps> {
     try {
       const { user } = await signInWithGooglePopup();
       createUserDocumentFromAuth(user);
-
-      console.log(user);
       this.props.setUser(user);
     } catch (error) {
       console.log(error);
@@ -38,7 +36,6 @@ class SignIn extends Component<SignInProps> {
           <p>Click the button to sign in</p>
 
           <Link to="/profile" style={{ textDecoration: "none" }}>
-        
             <GoogleSignInButton onClick={this.logGoogleUser}>
               Sign in with Google
             </GoogleSignInButton>
